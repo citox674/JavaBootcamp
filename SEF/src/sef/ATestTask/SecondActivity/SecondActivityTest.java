@@ -1,35 +1,35 @@
 package sef.ATestTask.SecondActivity;
-// Complete Code
-import junit.framework.TestCase;
+
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-public class SecondActivityTest extends TestCase {
+public class SecondActivityTest{
 
-	private SecondActivity theCalculator;
+	Calculator calc = new Calculator();
 
-	protected void setUp() throws Exception {
-		super.setUp();
-		//	Initialize variables to be used here
-		theCalculator = new SecondActivity();
-	}
-
-	protected void tearDown() throws Exception {
-		super.tearDown();
-	}
-
-	//Example ->
 	@Test
-	public void testGetSumPositiveValue() {
-		assertEquals(15, (theCalculator.getSum(5, 10)));
-		assertEquals(15, (theCalculator.getSum(10, 5)));
+	public void checkAddMethod() {
+		double numbers[] = {1.0, 2.0, 9.0};
+		assertEquals("Add numbers failed",12.0, calc.AddNumbers(numbers), 0.0);
 	}
 
-	//Example ->
 	@Test
-	public void testGetSumNegativeValue() {
-		assertEquals(5, (theCalculator.getSum(-5, 10)));
-		assertEquals(-5, (theCalculator.getSum(5, -10)));
+	public void checkMultiplyMethod() {
+		double numbers[] = {1.0, 2.0, 9.0};
+		assertEquals("Multiply numbers failed",18.0, calc.MultiplyNumbers(numbers), 0.0);
 	}
 
+	@Test
+	public void checkSubtractMethod() {
+		double number1 = 997.0;
+		double number2 = 222.0;
+		assertEquals("Subtract numbers failed",775.0, calc.SubtractNumbers(number1, number2), 0.0);
+	}
+
+	@Test
+	public void checkDivideMethod() {
+		double number1 = 997.0;
+		double number2 = 222.0;
+		assertEquals("Divide numbers failed",4.5, calc.DivideNumbers(number1, number2), 0.1);
+	}
 }
-

@@ -5,45 +5,72 @@ public class Person {
 
 //TODO 1 Implement Person Attributes
 
-	//Behavior - default constructor
-	public Person(){
+	//Attributes
+	private String firstName, secondName;
+	private int age;
+
+	// Person's default constructor
+	public Person() {
 		this.firstName="Unknown";
 		this.secondName = "Unknown";
 		this.age = 0;
 	}
 
-	//Behavior - parameterized constructor
-	public Person(String firstName, String secondName, int age){
-		this.firstName = firstName;
-		this.secondName = secondName;
+	// Person's parameterized constructor
+	public Person(String firstName, String secondName, int age) throws Numerals_In_Name {
+		// Task 8 first name
+		if (firstName.chars().allMatch(Character::isLetter))
+			this.firstName = firstName;
+		else throw new Numerals_In_Name("Numeral characters in first name");
+		// Task 8 second name
+		if (secondName.chars().allMatch(Character::isLetter))
+			this.secondName = secondName;
+		else throw new Numerals_In_Name("Numeral characters in second name");
+
 		this.age = age;
 	}
 
-	// getter for String firstName
+	// getter/setter for String firstName
 	public String getFirstName() {
 		return firstName;
 	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFirstName(String firstName) throws Numerals_In_Name {
+		// Task 8, first name
+		if (firstName.chars().allMatch(Character::isLetter))
+			this.firstName = firstName;
+		else throw new Numerals_In_Name("Numeral characters in first name");
 	}
 
-	// getter for int age
+	// getter/setter for String secondName
+	public String getSecondName() {
+		return secondName;
+	}
+	public void setSecondName(String secondName) throws Numerals_In_Name {
+		// Task 8, second name
+		if (secondName.chars().allMatch(Character::isLetter))
+			this.secondName = secondName;
+		else throw new Numerals_In_Name("Numeral characters in second name");
+	}
+
+	// getter/setter for int age
 	public int getAge() {
 		return age;
 	}
-
-	// setter for int age
 	public void setAge(int age) {
 		this.age = age;
 	}
 
-	public String getSecondName() {
-		return secondName;
+	// Person's introduction method
+	public void announce() {
+		System.out.println("\nMy name is " + getFirstName() + " " + getSecondName() + " and I am " + getAge() + " years old");
 	}
 
-	public void setSecondName(String secondName) {
-		this.secondName = secondName;
+	// Task 8, exception class
+	public class Numerals_In_Name extends Exception {
+		public Numerals_In_Name(String message){
+			super(message);
+		}
 	}
+
 }
 

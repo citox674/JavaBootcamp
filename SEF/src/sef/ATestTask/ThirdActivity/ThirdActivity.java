@@ -10,16 +10,20 @@ public class ThirdActivity {
         //TODO handle exception on proper way
         ta.validateUser("Ivan");
         ta.catchExeption();
+        ta.catchMe(1,0);
     }
 
     void catchExeption() {
         int[] arr = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
         for (int i = 0; i <= 10; i++) {
-            System.out.println(arr[i]);
+            try {
+                System.out.println(arr[i]);
+            }
+            catch (ArrayIndexOutOfBoundsException arrEx){
+                System.out.println("This should get printed even if there is an exception");
+            }
         }
-        System.out.println("This should get printed even if there is an exception");
-
     }
 
     void validateUser(String name) {
@@ -27,17 +31,41 @@ public class ThirdActivity {
         int flag = 0;
         //TODO if name in a list -> set flag=1
         // if at the end flag=0 -> throw the exeption
+        try {
+            for (int i = 0; i < 4; i++) {
+                if (name == validUsers[i]) {
+                    flag = 1;
+                    break;
+                }
+                if (flag == 0) throw new InvalidUserException("Invalid User");
+            }
+        }
+        catch (InvalidUserException iuEx) {
+            System.out.println("Exception: " + iuEx.getMessage());
+        }
     }
 
     void catchMe(int num1, int num2)
     {
         //TODO Catch exeption
-            int result=num1/num2;
-            System.out.println("The result is :" + result);
-
+        try {
+            int result = num1 / num2;
+            System.out.println("Result: " + result);
+        }
+        catch (Exception e){
+            System.out.println("Ex handled: " + e.getMessage());
+        }
+        finally {
             //TODO prints a message "Thank you for using this program." always
             System.out.println("Thank you for using this program.");
-
+        }
     }
+
+    public class InvalidUserException extends Exception {
+        public InvalidUserException(String message){
+            super(message);
+        }
+    }
+
 }
 
